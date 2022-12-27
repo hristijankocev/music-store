@@ -3,13 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Customer;
-use App\Models\User;
+use App\Models\PhoneNumber;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Customer>
+ * @extends Factory<PhoneNumber>
  */
-class CustomerFactory extends Factory
+class PhoneNumberFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,9 +19,8 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory(),
-            'delivery_address' => fake()->address(),
-            'date_birth' => fake()->dateTimeBetween('-70 years', '-18 years')
+            'customer_id' => Customer::factory(),
+            'phone_number' => fake()->phoneNumber(),
         ];
     }
 }

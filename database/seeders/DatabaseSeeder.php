@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Admin;
 use App\Models\Customer;
+use App\Models\PhoneNumber;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -38,6 +39,13 @@ class DatabaseSeeder extends Seeder
             $u->save();
             $c = Customer::factory()->create(['user_id' => $u->id]);
             $u->profileable()->associate($c)->save();
+
+            // Create phone numbers for the customers
+            for ($i = 0; $i < 2; $i++) {
+                PhoneNumber::factory()
+                    ->create(['customer_id' => $c->id])
+                    ->save();
+            }
         });
     }
 }

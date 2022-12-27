@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Customer extends Model
@@ -22,5 +23,10 @@ class Customer extends Model
     public function profile(): MorphOne
     {
         return $this->morphOne('App\User', 'profileable');
+    }
+
+    public function phoneNumbers(): HasMany
+    {
+        return $this->hasMany(PhoneNumber::class, 'phone_number', 'customer_id');
     }
 }
