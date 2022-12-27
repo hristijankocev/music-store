@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -46,6 +47,10 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        // When a new user is registered, he will be by default a 'Customer'
+        $customer = Customer::factory()->create(['user_id' => $user->id]);
+        $user->profileable()->associate($customer)->save();
 
         event(new Registered($user));
 
