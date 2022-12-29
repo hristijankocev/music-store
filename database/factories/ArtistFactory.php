@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Genre;
+use App\Models\Artist;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Genre>
+ * @extends Factory<Artist>
  */
-class GenreFactory extends Factory
+class ArtistFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class GenreFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->word()
+            'name' => ucfirst(fake()->name())
         ];
     }
 }

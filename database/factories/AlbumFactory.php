@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Album;
 use App\Models\Item;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Album>
+ * @extends Factory<Album>
  */
 class AlbumFactory extends Factory
 {
@@ -18,7 +19,7 @@ class AlbumFactory extends Factory
     public function definition()
     {
         return [
-            'album_name' => ucfirst(fake()->words(asText: true)),
+            'name' => ucfirst(fake()->words(asText: true)),
             'release_date' => fake()->dateTimeBetween('-60 years'),
             'id' => Item::factory()
         ];

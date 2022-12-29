@@ -25,8 +25,13 @@ class Customer extends Model
         return $this->morphOne('App\User', 'profileable');
     }
 
-    public function phoneNumbers(): HasMany
+    public function phones(): HasMany
     {
         return $this->hasMany(PhoneNumber::class, 'phone_number', 'customer_id');
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

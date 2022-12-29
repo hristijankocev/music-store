@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->float('price');
+            $table->string('itemable_type')->nullable();
+            $table->unsignedInteger('itemable_id')->nullable();
             $table->timestamps();
         });
     }

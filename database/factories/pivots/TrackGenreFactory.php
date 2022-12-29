@@ -1,14 +1,16 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\pivots;
 
 use App\Models\Genre;
+use App\Models\Pivots\TrackGenre;
+use App\Models\Track;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Genre>
+ * @extends Factory<TrackGenre>
  */
-class GenreFactory extends Factory
+class TrackGenreFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +20,8 @@ class GenreFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->word()
+            'track_id' => Track::factory(),
+            'genre_id' => Genre::factory()
         ];
     }
 }

@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->foreign('id')->references('id')->on('items')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->string('track_name');
-            $table->integer('track_length');
+            $table->string('name');
+            $table->integer('length');
             $table->foreignId('album_id')
                 ->nullable()
                 ->references('id')->on('albums')

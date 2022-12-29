@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Genre;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Genre>
+ * @extends Factory<Order>
  */
-class GenreFactory extends Factory
+class OrderFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class GenreFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->word()
+            'total' => fake()->numberBetween(60, 1000)
         ];
     }
 }
