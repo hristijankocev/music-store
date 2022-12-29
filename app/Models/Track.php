@@ -33,6 +33,6 @@ class Track extends Model
 
     public function item(): MorphOne
     {
-        return $this->morphOne('App\Item', 'itemable');
+        return $this->morphOne(Item::class, 'itemable');
     }
 }

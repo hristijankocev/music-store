@@ -12,6 +12,6 @@ class Admin extends Model
 
     public function profile(): MorphOne
     {
-        return $this->morphOne('App\User', 'profileable');
+        return $this->morphOne(User::class, 'profileable');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use App\Models\User;
 
 class Customer extends Model
 {
@@ -22,12 +23,12 @@ class Customer extends Model
 
     public function profile(): MorphOne
     {
-        return $this->morphOne('App\User', 'profileable');
+        return $this->morphOne(User::class, 'profileable');
     }
 
     public function phones(): HasMany
     {
-        return $this->hasMany(PhoneNumber::class, 'phone_number', 'customer_id');
+        return $this->hasMany(PhoneNumber::class);
     }
 
     public function orders(): HasMany

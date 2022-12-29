@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Pivots\OrderItem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +14,8 @@ class Item extends Model
 
     public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsToMany(Order::class, 'order_item')
+            ->using(OrderItem::class);
     }
 
     protected $with = [
