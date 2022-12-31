@@ -41,7 +41,6 @@ class TrackSeeder extends Seeder
         $albumItem->save();
         $album = Album::factory()->create(['id' => $albumItem->id, 'name' => 'Matahari']);
         $albumItem->itemable()->associate($album)->save();
-//        $album->save();
 
         Item::factory(5)->make()->each(function ($item) use ($album, $genres, $artists) {
             $item->save();
@@ -51,10 +50,16 @@ class TrackSeeder extends Seeder
             $item->itemable()->associate($track)->save();
 
             TrackGenre::factory()->create(['track_id' => $track->id,
+                'genre_id' => $genres[0]->id]);
+
+            TrackGenre::factory()->create(['track_id' => $track->id,
                 'genre_id' => $genres[1]->id]);
 
             TrackArtist::factory()->create(['track_id' => $track->id,
                 'artist_id' => $artists[0]->id]);
         });
+        // Add a second artist to a song
+        TrackArtist::factory()->create(['track_id' => Track::all()[5]->id,
+            'artist_id' => $artists[1]->id]);
     }
 }
