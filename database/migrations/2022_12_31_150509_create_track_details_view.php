@@ -13,7 +13,7 @@ return new class extends Migration {
     {
         DB::statement(
         /** @lang SQL */ "
-        create view trackDetailsView as
+        create view vw_track_details as
         select t1.id as track_id,
         track_artists.artists,
         t1.name as name,
@@ -52,6 +52,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        DB::statement('DROP VIEW trackDetailsView');
+        DB::statement('DROP VIEW vw_track_details');
     }
 };
