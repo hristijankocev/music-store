@@ -22,8 +22,7 @@ class TrackFactory extends Factory
         return [
             'id' => Item::factory(),
             'name' => ucfirst(fake()->words(asText: true)),
-            'length' => fake()->numberBetween(200, 400),
-            'album_id' => Album::factory()
+            'length' => '00:0' . fake()->numberBetween(int2: 5) . ':' . fake()->numberBetween(1, 60),
         ];
     }
 }

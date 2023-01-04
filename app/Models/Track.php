@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Duration;
 use App\Models\Pivots\TrackArtist;
 use App\Models\Pivots\TrackGenre;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,12 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 class Track extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'length',
+        'album_id'
+    ];
 
     public function genres(): BelongsToMany
     {
@@ -35,4 +42,8 @@ class Track extends Model
     {
         return $this->morphOne(Item::class, 'itemable');
     }
+
+    protected $casts = [
+        'length' => Duration::class
+    ];
 }

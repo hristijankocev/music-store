@@ -31,7 +31,7 @@ return new class extends Migration {
                            group by 1, 2) as track_artists
                            on t1.id = track_artists.track_id) as track_artists
                 on t1.id = track_artists.id
-                join (select t1.id,
+                left join (select t1.id,
                     track_genres.genres as genres
                     from tracks t1
                         join (select t.id, t.name, string_agg(g.name, ', ') as genres
