@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrackController;
 use Illuminate\Support\Facades\Route;
@@ -27,19 +28,27 @@ Route::get('/tracks', [TrackController::class, 'index'])
     ->middleware(['auth'])
     ->name('tracks');
 
-Route::get('/tracks/add', [TrackController::class, 'create'])
-    ->middleware(['auth'])
-    ->name('tracks.create');
 
-// TODO: make it only so an admin can add tracks
-Route::post('/tracks/add', [TrackController::class, 'store'])
-    ->middleware(['auth'])
-    ->name('tracks.store');
+Route::middleware('can:admin')->group(function () {
+    Route::get('/tracks/add', [TrackController::class, 'create'])
+        ->middleware(['auth'])
+        ->name('tracks.create');
+    Route::post('/tracks/add', [TrackController::class, 'store'])
+        ->middleware(['auth'])
+        ->name('tracks.store');
+
+    Route::get('/admin/orders', [AdminOrderController::class, 'index'])
+        ->middleware(['auth'])
+        ->name('admin.orders');
+    Route::get('/admin/order/{order:id}', [AdminOrderController::class, 'show'])
+        ->middleware(['auth'])
+        ->name('admin.order.show');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
