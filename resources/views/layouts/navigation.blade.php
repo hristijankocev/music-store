@@ -38,6 +38,11 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @customer
+                <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')" class="mr-10">
+                    {{ __('Cart') }}
+                </x-nav-link>
+                @endcustomer
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -96,6 +101,27 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @admin
+            <x-responsive-nav-link :href="route('tracks')" :active="request()->routeIs('tracks')">
+                {{ __('Tracks') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.orders')" :active="request()->routeIs('admin.orders')">
+                {{ __('Orders') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.statistics')" :active="request()->routeIs('admin.statistics')">
+                {{ __('Statistics') }}
+            </x-responsive-nav-link>
+            @endadmin
+
+            @customer
+            <x-responsive-nav-link :href="route('shop')" :active="request()->routeIs('shop')">
+                {{ __('Shop') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
+                {{ __('Cart') }}
+            </x-responsive-nav-link>
+            @endcustomer
         </div>
 
         <!-- Responsive Settings Options -->

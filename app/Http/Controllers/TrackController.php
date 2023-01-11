@@ -12,6 +12,7 @@ use App\Models\Track;
 use App\Models\TrackDetails;
 use App\Rules\Duration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TrackController extends Controller
 {
@@ -96,7 +97,7 @@ class TrackController extends Controller
             }
         }
 
-
+        Session::flash('message', 'Track added successfully!');
         return redirect(route('tracks'));
     }
 

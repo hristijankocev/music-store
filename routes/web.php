@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminOrderController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrackController;
 use App\Models\Item;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +64,18 @@ Route::middleware('can:customer')->group(function () {
             'items' => Item::paginate(5),
         ]);
     })->name('shop');
+
+    Route::get('/cart', function () {
+        return view('customer.cart.index')->with([
+            'items' => Cart::content()
+        ]);
+    })->name('cart');
+
+    Route::get('/cart/{item:id}', [ItemController::class, 'addToCart'])
+        ->name('cart.store');
+
+    Route::post('/order/store', [OrderController::class, 'store'])
+        ->name('order.store');
 });
 
 

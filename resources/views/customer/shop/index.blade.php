@@ -30,19 +30,24 @@
                                     <td class="px-6 py-4 whitespace-nowrap">${{ $item->price }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ last(explode('\\' ,$item->itemable_type)) }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
-                                             viewBox="0 0 25 25">
-                                            <style>
-                                                .c {
-                                                    fill: #cde;
-                                                }
-                                            </style>
-                                            <path class="c"
-                                                  d="m7.2 15 l0-0 1-2h8a2 2 0 0 0 2-1l4-7L20 4h-0l-1 2-3 5H8.5l-0-0L6 6l-1-2-1-2H1v2h2l3.5 8-1.5 2.5A2 2 0 0 0 7 17h12v-2H7az"/>
-                                            <circle class="c" cx="7" cy="20" r="2"/>
-                                            <circle class="c" cx="17" cy="20" r="2"/>
-                                            <rect class="c" x="5" y="4" width="15" height="2"/>
-                                        </svg>
+                                        <form action="{{ route('cart.store', ['item' => $item->id]) }}">
+                                            @csrf
+                                            <button title="Add item to cart" type="submit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                     viewBox="0 0 25 25">
+                                                    <style>
+                                                        .c {
+                                                            fill: #cde;
+                                                        }
+                                                    </style>
+                                                    <path class="c"
+                                                          d="m7.2 15 l0-0 1-2h8a2 2 0 0 0 2-1l4-7L20 4h-0l-1 2-3 5H8.5l-0-0L6 6l-1-2-1-2H1v2h2l3.5 8-1.5 2.5A2 2 0 0 0 7 17h12v-2H7az"/>
+                                                    <circle class="c" cx="7" cy="20" r="2"/>
+                                                    <circle class="c" cx="17" cy="20" r="2"/>
+                                                    <rect class="c" x="5" y="4" width="15" height="2"/>
+                                                </svg>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
