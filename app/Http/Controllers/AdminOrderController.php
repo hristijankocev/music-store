@@ -14,7 +14,7 @@ class AdminOrderController extends Controller
     public function index(): Factory|View|Application
     {
         return view('admin.order.index')->with([
-            'orders' => OrderDetails::paginate(10)
+            'orders' => OrderDetails::paginate(5)
         ]);
     }
 

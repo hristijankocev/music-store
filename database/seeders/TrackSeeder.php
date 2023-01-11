@@ -28,7 +28,9 @@ class TrackSeeder extends Seeder
             $item->save();
 
             $track = Track::factory()
-                ->create(['id' => $item->id, 'album_id' => null]);
+                ->create(['id' => $item->id,
+                    'album_id' => null,
+                    'created_at' => fake()->dateTimeBetween(startDate: '-60 years')]);
 
             $item->itemable()->associate($track)->save();
 
@@ -42,10 +44,12 @@ class TrackSeeder extends Seeder
         $album = Album::factory()->create(['id' => $albumItem->id, 'name' => 'Matahari']);
         $albumItem->itemable()->associate($album)->save();
 
-        Item::factory(5)->make()->each(function ($item) use ($album, $genres, $artists) {
+        Item::factory(100)->make()->each(function ($item) use ($album, $genres, $artists) {
             $item->save();
             $track = Track::factory()
-                ->create(['id' => $item->id, 'album_id' => $album->id]);
+                ->create(['id' => $item->id,
+                    'album_id' => $album->id,
+                    'created_at' => fake()->dateTimeBetween(startDate: '-60 years')]);
 
             $item->itemable()->associate($track)->save();
 

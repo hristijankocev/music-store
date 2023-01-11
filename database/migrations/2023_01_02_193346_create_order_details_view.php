@@ -29,6 +29,7 @@ return new class extends Migration {
                 inner join orders as o on o.customer_id = c.id
                 left join phone_numbers as pn on pn.customer_id = c.id
             group by u.id, c.date_birth, c.delivery_address, o.id
+            order by o.id
         ;");
     }
 

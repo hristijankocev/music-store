@@ -33,5 +33,13 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('admin', function () {
             return Gate::allows('admin');
         });
+
+        Gate::define('customer', function (?User $user) {
+            return $user?->profileable_type === 'App\Models\Customer';
+        });
+
+        Blade::if('customer', function () {
+            return Gate::allows('customer');
+        });
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\Item;
 use App\Models\Order;
 use App\Models\Pivots\OrderItem;
 use App\Models\Track;
@@ -17,19 +18,24 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        $customer = Customer::first();
 
-        $order = Order::factory()->create(['customer_id' => $customer->id]);
-        $order->customer_id = $customer->id;
+        // Create orders
+        for ($i = 0; $i < 20; $i++) {
+            $customer = Customer::inRandomOrder()->limit(1)->get()[0];
 
-        $order_total = 0;
-        Track::all()->each(function ($track) use ($order, &$order_total) {
-            OrderItem::factory()->create([
-                'order_id' => $order->id, 'item_id' => $track->item->id])->save();
+            $order = Order::factory()->create(['customer_id' => $customer->id]);
+            $order->customer_id = $customer->id;
+            $order_total = 0;
+            Item::inRandomOrder()->limit(5)->get()->each(function ($item) use ($order, &$order_total) {
+                OrderItem::factory()->create([
+                    'order_id' => $order->id, 'item_id' => $item->id])->save();
 
-            $order_total += (int)$track->item->price;
-        });
-        $order->total = $order_total;
-        $order->save();
+                $order_total += (int)$item->price;
+            });
+            $order->total = $order_total;
+            $order->created_at = fake()->dateTimeBetween(startDate: '-10 year', endDate: '-6 months');
+            $order->updated_at = $order->created_at;
+            $order->save();
+        }
     }
 }

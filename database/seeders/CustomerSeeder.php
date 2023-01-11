@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\PhoneNumber;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerSeeder extends Seeder
 {
@@ -29,5 +30,21 @@ class CustomerSeeder extends Seeder
                     ->save();
             }
         });
+
+        // Make a customer we can use to log in
+        $dummyUser = User::factory()->create([
+            'email' => 'customer@example.com',
+            'username' => 'dummy_customer',
+            'password' => Hash::make('password')
+        ]);
+        $dummyUser->save();
+        $dummyCustomer = Customer::factory()->create(['user_id' => $dummyUser->id]);
+        $dummyUser->profileable()->associate($dummyCustomer)->save();
+
+        for ($i = 0; $i < 2; $i++) {
+            PhoneNumber::factory()
+                ->create(['customer_id' => $dummyCustomer->id])
+                ->save();
+        }
     }
 }
