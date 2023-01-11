@@ -19,4 +19,4 @@
 
 ### Database Diagram
 
-![Drag Racing](project-db-diagram.png)
+![DB Diagram](project-db-diagram.png)
