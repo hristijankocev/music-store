@@ -1,10 +1,11 @@
 # 'Music store' application made in Laravel.
 
+- `cp ./.env.example ./.env`
 - set your DB connection settings in the `.env` file
 - `php artisan key:generate`
 - `php artisan migrate:fresh --seed`
-- `php artisan serve`
 - `npm run dev`
+- `php artisan serve`
 
 #### The database seeders will create entries for every table.
 
