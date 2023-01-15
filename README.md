@@ -1,5 +1,7 @@
 # 'Music store' application made in Laravel.
 
+- `composer install`
+- `npm install`
 - `cp ./.env.example ./.env`
 - set your DB connection settings in the `.env` file
 - `php artisan key:generate`
